@@ -16,6 +16,7 @@
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      ontologyIRI="http://erlangen-crm.org/efrbroo/">
+    <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
@@ -30,6 +31,26 @@
     <Annotation>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">Changelog:
+140217 (Stanislava Gardasevic)
+
+New propperty R32_is_warranted_by  (warrants)
+New propperty R34_has_validity_period (is validity period of)
+New propperty R36_uses_script_conversion (is script conversion)
+New propperty R37_states_as_nomen (is stated as nomen in)
+New propperty R38_refers_to_thema (is thema of)
+New propperty R39_is_intended_for (is target audience in)
+New propperty R64_used_name (was name used by)
+
+140131 (Stanislava Gardasevic)
+P106_has_component as a duble property erased
+New propperty R14_incorporates
+New propperty R33_has content
+New property R56_has_related_use
+New property R63_named
+New property R35_is _specified_by
+For R8_consists_of changed range from F12_Nomen to E90_Symbolic_Object
+For R40_has_representative_expression changed its superproperty from P130 to R3_is_realized_in
+
 140129 (Stanislava Gardasevic)
 -class name F12_Name to F12_Nomen
 -F12 Nomen made subclass of E41_Appelation
@@ -247,9 +268,6 @@
     </Declaration>
     <Declaration>
         <Class IRI="F9_Place"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty abbreviatedIRI="ecrm:P106_has_component"/>
     </Declaration>
     <Declaration>
         <ObjectProperty abbreviatedIRI="ecrm:P106_is_composed_of"/>
@@ -483,6 +501,48 @@
         <ObjectProperty IRI="R31i_has_reproduction"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="R32_is_warranted_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R32i_warrants"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R34_has_validity_period"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R34i_is_validity_period_of"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R35_is_specified_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R35i_specifies"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R36_uses_script_conversion"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R36i_is_script_conversion_used_in"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R37_states_as_nomen"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R37i_is_stated_as_nomen_in"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R38_refers_to_thema"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R38i_is_thema_of"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R39_is_intended_for"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R39i_is_target_audience_in"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="R3_is_realised_in"/>
     </Declaration>
     <Declaration>
@@ -531,12 +591,6 @@
         <ObjectProperty IRI="R46i_was_assigned_by"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="R47_used_constituent"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="R47i_was_used_in"/>
-    </Declaration>
-    <Declaration>
         <ObjectProperty IRI="R48_assigned_to"/>
     </Declaration>
     <Declaration>
@@ -579,10 +633,28 @@
         <ObjectProperty IRI="R53i_was_assigned_by"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="R56_has_related_use"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R56i_is_related_use_for"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="R5_has_component"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="R5i_is_component_of"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R63_named"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R63i_was_named_by"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R64_used_name"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="R64i_was_name_used_by"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="R6_carries"/>
@@ -610,6 +682,9 @@
     </Declaration>
     <Declaration>
         <DataProperty IRI="CLP57_should_have_number_of_parts"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="R33_has_content"/>
     </Declaration>
     <EquivalentClasses>
         <Class abbreviatedIRI="ecrm:E15_Identifier_Assignment"/>
@@ -678,6 +753,13 @@
     <SubClassOf>
         <Class IRI="F12_Nomen"/>
         <Class abbreviatedIRI="ecrm:E41_Appellation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="F12_Nomen"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="R33_has_content"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataSomeValuesFrom>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="F13_Identifier"/>
@@ -949,12 +1031,52 @@
         <Class IRI="F2_Expression"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="F34_KOS"/>
+        <ObjectMinCardinality cardinality="1">
+            <ObjectProperty IRI="R35i_specifies"/>
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="F34_KOS"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="R34_has_validity_period"/>
+            <Class abbreviatedIRI="ecrm:E52_Time-Span"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="F35_Nomen_Use_Statement"/>
         <Class abbreviatedIRI="ecrm:E29_Design_or_Procedure"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="F35_Nomen_Use_Statement"/>
         <Class IRI="F2_Expression"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="F35_Nomen_Use_Statement"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="R35_is_specified_by"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="F35_Nomen_Use_Statement"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="R37_states_as_nomen"/>
+            <Class IRI="F12_Nomen"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="F35_Nomen_Use_Statement"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="R38_refers_to_thema"/>
+            <Class abbreviatedIRI="ecrm:E1_CRM_Entity"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="F35_Nomen_Use_Statement"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectProperty IRI="R36_uses_script_conversion"/>
+            <Class IRI="F36_Script_Conversion"/>
+        </ObjectMaxCardinality>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="F36_Script_Conversion"/>
@@ -1032,6 +1154,19 @@
         <Class abbreviatedIRI="ecrm:E13_Attribute_Assignment"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="F52_Name_Use_Activity"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="R63_named"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="F52_Name_Use_Activity"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="R64_used_name"/>
+            <Class abbreviatedIRI="ecrm:E41_Appellation"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="F5_Item"/>
         <Class abbreviatedIRI="ecrm:E84_Information_Carrier"/>
     </SubClassOf>
@@ -1061,7 +1196,7 @@
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="R14_incorporates"/>
-        <ObjectProperty abbreviatedIRI="ecrm:P106_has_component"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P106_is_composed_of"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="R14_incorporates"/>
@@ -1144,12 +1279,44 @@
         <ObjectProperty abbreviatedIRI="ecrm:P130_shows_features_of"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
+        <ObjectProperty IRI="R32_is_warranted_by"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P67_refers_to"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="R32i_warrants"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P67i_is_referred_to_by"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="R35_is_specified_by"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P148_has_component"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="R35i_specifies"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P148i_is_component_of"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="R37_states_as_nomen"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P67_refers_to"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="R37i_is_stated_as_nomen_in"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P67i_is_referred_to_by"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="R39_is_intended_for"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P67_refers_to"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="R39i_is_target_audience_in"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P67i_is_referred_to_by"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
         <ObjectProperty IRI="R3_is_realised_in"/>
         <ObjectProperty abbreviatedIRI="ecrm:P130_shows_features_of"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="R40_has_representative_expression"/>
-        <ObjectProperty abbreviatedIRI="ecrm:P130_shows_features_of"/>
+        <ObjectProperty IRI="R3_is_realised_in"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="R41_has_representative_manifestation_product_type"/>
@@ -1176,10 +1343,6 @@
         <ObjectProperty abbreviatedIRI="ecrm:P37_assigned"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
-        <ObjectProperty IRI="R47_used_constituent"/>
-        <ObjectProperty abbreviatedIRI="ecrm:P16_used_specific_object"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
         <ObjectProperty IRI="R48_assigned_to"/>
         <ObjectProperty abbreviatedIRI="ecrm:P140_assigned_attribute_to"/>
     </SubObjectPropertyOf>
@@ -1204,8 +1367,28 @@
         <ObjectProperty abbreviatedIRI="ecrm:P141_assigned"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
+        <ObjectProperty IRI="R56_has_related_use"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P69_is_associated_with"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
         <ObjectProperty IRI="R5_has_component"/>
         <ObjectProperty abbreviatedIRI="ecrm:P148_has_component"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="R63_named"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P140_assigned_attribute_to"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="R63i_was_named_by"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P140i_was_attributed_by"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="R64_used_name"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P141_assigned"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="R64i_was_name_used_by"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P141i_was_assigned_by"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="R6_carries"/>
@@ -1228,16 +1411,16 @@
         <ObjectProperty IRI="CLP104_subject_to"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="CLP105i_right_on"/>
         <ObjectProperty IRI="CLP105_right_held_by"/>
+        <ObjectProperty IRI="CLP105i_right_on"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="CLP2i_should_be_type_of"/>
         <ObjectProperty IRI="CLP2_should_have_type"/>
+        <ObjectProperty IRI="CLP2i_should_be_type_of"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="CLP43i_should_be_dimension_of"/>
         <ObjectProperty IRI="CLP43_should_have_dimension"/>
+        <ObjectProperty IRI="CLP43i_should_be_dimension_of"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="CLP45i_should_be_incorporated_in"/>
@@ -1252,28 +1435,28 @@
         <ObjectProperty IRI="CLR6_should_carry"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R10i_is_member_of"/>
         <ObjectProperty IRI="R10_has_member"/>
+        <ObjectProperty IRI="R10i_is_member_of"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R11i_is_issuing_rule_of"/>
         <ObjectProperty IRI="R11_has_issuing_rule"/>
+        <ObjectProperty IRI="R11i_is_issuing_rule_of"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="R12i_realises"/>
         <ObjectProperty IRI="R12_is_realised_in"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R13i_realises"/>
         <ObjectProperty IRI="R13_is_realised_in"/>
+        <ObjectProperty IRI="R13i_realises"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="R14i_is_incorporated_in"/>
         <ObjectProperty IRI="R14_incorporates"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R15i_is_fragment_of"/>
         <ObjectProperty IRI="R15_has_fragment"/>
+        <ObjectProperty IRI="R15i_is_fragment_of"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="R16i_was_initiated_by"/>
@@ -1296,8 +1479,8 @@
         <ObjectProperty IRI="R1_is_logical_successor_of"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R20i_was_recorded_through"/>
         <ObjectProperty IRI="R20_recorded"/>
+        <ObjectProperty IRI="R20i_was_recorded_through"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="R21i_was_created_through"/>
@@ -1308,48 +1491,80 @@
         <ObjectProperty IRI="R22_created_a_realisation_of"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R23i_was_realised_through"/>
         <ObjectProperty IRI="R23_created_a_realisation_of"/>
+        <ObjectProperty IRI="R23i_was_realised_through"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="R24i_was_created_through"/>
         <ObjectProperty IRI="R24_created"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R25i_was_performed_in"/>
         <ObjectProperty IRI="R25_performed"/>
+        <ObjectProperty IRI="R25i_was_performed_in"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R26i_was_produced_by"/>
         <ObjectProperty IRI="R26_produced_things_of_type"/>
+        <ObjectProperty IRI="R26i_was_produced_by"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="R27i_was_used_by"/>
         <ObjectProperty IRI="R27_used_as_source_material"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R28i_was_produced_by"/>
         <ObjectProperty IRI="R28_produced"/>
+        <ObjectProperty IRI="R28i_was_produced_by"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="R29i_was_reproduced_by"/>
         <ObjectProperty IRI="R29_reproduced"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R2i_has_derivative"/>
         <ObjectProperty IRI="R2_is_derivative_of"/>
+        <ObjectProperty IRI="R2i_has_derivative"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R30i_was_produced_by"/>
         <ObjectProperty IRI="R30_produced"/>
+        <ObjectProperty IRI="R30i_was_produced_by"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="R31i_has_reproduction"/>
         <ObjectProperty IRI="R31_is_reproduction_of"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R3i_realises"/>
+        <ObjectProperty IRI="R32i_warrants"/>
+        <ObjectProperty IRI="R32_is_warranted_by"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="R34i_is_validity_period_of"/>
+        <ObjectProperty IRI="R34_has_validity_period"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="R35i_specifies"/>
+        <ObjectProperty IRI="R35_is_specified_by"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="R36i_is_script_conversion_used_in"/>
+        <ObjectProperty IRI="R36_uses_script_conversion"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="R37i_is_stated_as_nomen_in"/>
+        <ObjectProperty IRI="R37_states_as_nomen"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="R38_refers_to_thema"/>
+        <ObjectProperty IRI="R38i_is_thema_of"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="R38i_is_thema_of"/>
+        <ObjectProperty IRI="R38i_is_thema_of"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="R39i_is_target_audience_in"/>
+        <ObjectProperty IRI="R39_is_intended_for"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
         <ObjectProperty IRI="R3_is_realised_in"/>
+        <ObjectProperty IRI="R3i_realises"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="R40i_is_representative_expression_for"/>
@@ -1364,32 +1579,28 @@
         <ObjectProperty IRI="R42_is_representative_manifestation_singleton_for"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R43i_performed"/>
         <ObjectProperty IRI="R43_carried_out_by"/>
+        <ObjectProperty IRI="R43i_performed"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R44i_performed"/>
         <ObjectProperty IRI="R44_carried_out_by"/>
+        <ObjectProperty IRI="R44i_performed"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="R45i_was_assigned_by"/>
         <ObjectProperty IRI="R45_assigned_to"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R46i_was_assigned_by"/>
         <ObjectProperty IRI="R46_assigned"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="R47i_was_used_in"/>
-        <ObjectProperty IRI="R47_used_constituent"/>
+        <ObjectProperty IRI="R46i_was_assigned_by"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="R48i_was_assigned_by"/>
         <ObjectProperty IRI="R48_assigned_to"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R49i_was_assigned_by"/>
         <ObjectProperty IRI="R49_assigned"/>
+        <ObjectProperty IRI="R49i_was_assigned_by"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="R4i_comprises_carriers_of"/>
@@ -1400,20 +1611,28 @@
         <ObjectProperty IRI="R50_assigned_to"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R51i_was_assigned_by"/>
         <ObjectProperty IRI="R51_assigned"/>
+        <ObjectProperty IRI="R51i_was_assigned_by"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R52i_was_the_rule_used_in"/>
         <ObjectProperty IRI="R52_used_rule"/>
+        <ObjectProperty IRI="R52i_was_the_rule_used_in"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R53i_was_assigned_by"/>
         <ObjectProperty IRI="R53_assigned"/>
+        <ObjectProperty IRI="R53i_was_assigned_by"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R5i_is_component_of"/>
         <ObjectProperty IRI="R5_has_component"/>
+        <ObjectProperty IRI="R5i_is_component_of"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="R63_named"/>
+        <ObjectProperty IRI="R63i_was_named_by"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="R64i_was_name_used_by"/>
+        <ObjectProperty IRI="R64_used_name"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="R6i_is_carried_by"/>
@@ -1424,8 +1643,8 @@
         <ObjectProperty IRI="R7_is_example_of"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
-        <ObjectProperty IRI="R8i_forms_part_of"/>
         <ObjectProperty IRI="R8_consists_of"/>
+        <ObjectProperty IRI="R8i_forms_part_of"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="R9i_realises"/>
@@ -1556,6 +1775,38 @@
         <Class abbreviatedIRI="ecrm:E84_Information_Carrier"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
+        <ObjectProperty IRI="R32_is_warranted_by"/>
+        <Class IRI="F35_Nomen_Use_Statement"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="R34_has_validity_period"/>
+        <Class IRI="F34_KOS"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="R35_is_specified_by"/>
+        <Class IRI="F35_Nomen_Use_Statement"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="R35i_specifies"/>
+        <Class IRI="F34_KOS"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="R36_uses_script_conversion"/>
+        <Class IRI="F35_Nomen_Use_Statement"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="R37_states_as_nomen"/>
+        <Class IRI="F35_Nomen_Use_Statement"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="R38_refers_to_thema"/>
+        <Class IRI="F35_Nomen_Use_Statement"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="R39_is_intended_for"/>
+        <Class IRI="F35_Nomen_Use_Statement"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
         <ObjectProperty IRI="R3_is_realised_in"/>
         <Class IRI="F1_Work"/>
     </ObjectPropertyDomain>
@@ -1588,10 +1839,6 @@
         <Class IRI="F40_Identifier_Assignment"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="R47_used_constituent"/>
-        <Class IRI="F40_Identifier_Assignment"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
         <ObjectProperty IRI="R48_assigned_to"/>
         <Class IRI="F41_Representative_Manifestation_Assignment"/>
     </ObjectPropertyDomain>
@@ -1620,8 +1867,20 @@
         <Class IRI="F41_Representative_Manifestation_Assignment"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
+        <ObjectProperty IRI="R56_has_related_use"/>
+        <Class IRI="F35_Nomen_Use_Statement"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
         <ObjectProperty IRI="R5_has_component"/>
         <Class IRI="F2_Expression"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="R63_named"/>
+        <Class IRI="F52_Name_Use_Activity"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="R64_used_name"/>
+        <Class IRI="F52_Name_Use_Activity"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="R6_carries"/>
@@ -1639,6 +1898,14 @@
         <ObjectProperty IRI="R9_is_realised_in"/>
         <Class IRI="F14_Individual_Work"/>
     </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="ecrm:P142_used_constituent"/>
+        <Class abbreviatedIRI="ecrm:E41_Appellation"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="ecrm:P14_carried_out_by"/>
+        <Class abbreviatedIRI="ecrm:E39_Actor"/>
+    </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="CLP104_subject_to"/>
         <Class abbreviatedIRI="ecrm:E30_Right"/>
@@ -1764,6 +2031,38 @@
         <Class abbreviatedIRI="ecrm:E84_Information_Carrier"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
+        <ObjectProperty IRI="R32_is_warranted_by"/>
+        <Class IRI="F52_Name_Use_Activity"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="R34_has_validity_period"/>
+        <Class abbreviatedIRI="ecrm:E52_Time-Span"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="R35_is_specified_by"/>
+        <Class IRI="F34_KOS"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="R35i_specifies"/>
+        <Class IRI="F35_Nomen_Use_Statement"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="R36_uses_script_conversion"/>
+        <Class IRI="F36_Script_Conversion"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="R37_states_as_nomen"/>
+        <Class IRI="F12_Nomen"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="R38_refers_to_thema"/>
+        <Class abbreviatedIRI="ecrm:E1_CRM_Entity"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="R39_is_intended_for"/>
+        <Class abbreviatedIRI="ecrm:E74_Group"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
         <ObjectProperty IRI="R3_is_realised_in"/>
         <Class IRI="F22_Self-Contained_Expression"/>
     </ObjectPropertyRange>
@@ -1796,10 +2095,6 @@
         <Class IRI="F13_Identifier"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="R47_used_constituent"/>
-        <Class abbreviatedIRI="ecrm:E90_Symbolic_Object"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
         <ObjectProperty IRI="R48_assigned_to"/>
         <Class IRI="F2_Expression"/>
     </ObjectPropertyRange>
@@ -1828,8 +2123,20 @@
         <Class IRI="F4_Manifestation_Singleton"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
+        <ObjectProperty IRI="R56_has_related_use"/>
+        <Class IRI="F35_Nomen_Use_Statement"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
         <ObjectProperty IRI="R5_has_component"/>
         <Class IRI="F22_Self-Contained_Expression"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="R63_named"/>
+        <Class abbreviatedIRI="ecrm:E1_CRM_Entity"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="R64_used_name"/>
+        <Class abbreviatedIRI="ecrm:E41_Appellation"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="R6_carries"/>
@@ -1841,20 +2148,43 @@
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="R8_consists_of"/>
-        <Class IRI="F12_Nomen"/>
+        <Class abbreviatedIRI="ecrm:E90_Symbolic_Object"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="R9_is_realised_in"/>
         <Class IRI="F22_Self-Contained_Expression"/>
     </ObjectPropertyRange>
+    <SubDataPropertyOf>
+        <DataProperty IRI="R33_has_content"/>
+        <DataProperty abbreviatedIRI="ecrm:P3_has_note"/>
+    </SubDataPropertyOf>
     <DataPropertyDomain>
         <DataProperty IRI="CLP57_should_have_number_of_parts"/>
         <Class IRI="F3_Manifestation_Product_Type"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="R33_has_content"/>
+        <Class IRI="F12_Nomen"/>
     </DataPropertyDomain>
     <DataPropertyRange>
         <DataProperty IRI="CLP57_should_have_number_of_parts"/>
         <Datatype abbreviatedIRI="xsd:positiveInteger"/>
     </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>ecrm:P128_carries</AbbreviatedIRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">carries</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>ecrm:P142_used_constituent</AbbreviatedIRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">used constituent</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>ecrm:P69_is_associated_with</AbbreviatedIRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">has association with</Literal>
+    </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>CLP104_subject_to</IRI>
@@ -3131,33 +3461,21 @@ The concept of the third alternate take of the musical work entitled ‘Blue Haw
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>R14_incorporates</IRI>
-        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">Scope note:
+        <Literal datatypeIRI="&rdf;PlainLiteral">Scope note:	
 This property associates an instance of F22 Self-Contained Expression with an instance of F2 Expression that was included in it and that is a realisation of an independent work. The incorporated expression may be self-contained or fragmentary.
-
 This property makes it possible to recognise the autonomous status of the incorporated expression, which was created in a distinct context, and can be incorporated in many distinct self-contained expressions, and to highlight the difference between structural and accidental whole-part relationships between conceptual entities.
-
 It accounts for many cultural facts that are quite frequent and significant: the inclusion of a poem in an anthology, the re-use of an operatic aria in a new opera, the use of a reproduction of a painting for a book cover or a CD booklet, the integration of textual quotations, the presence of lyrics in a song that sets those lyrics to music, the presence of the text of a play in a movie based on that play, etc.
 
-Examples:
-The text of the present version of the FRBROO definition (F22) R14 incorporates The beginning of the Scope Note for E4 Period in the CIDOC CRM definition, version 4.4 (F23)
-
-The text of the anthology entitled ‘American Women Poets of the Nineteenth Century: An Anthology’, edited by Cheryl Walker and published by Rutgers University Press in July 1992 (F22) R14 incorporates The text of the poem entitled ‘Acquainted with Grief’ and authored by Helen Hunt Jackson
-
-The sonic content of the CD entitled ‘Great moments of Lucia Popp’ issued by EMI Music International in 1996 and identified by UPC/EAN ‘0724356577022’ (F24) R14 incorporates The recorded performance of Mozart’s aria entitled ‘Der Hölle Rache’ (also known as ‘The Queen of the Night’s Aria’) by Lucia Popp accompanied by the Philharmonia orchestra conducted by Otto Klemperer in London, Kingsway Hall, between March 24, 1964 and April 10, 1964 (F26)
-
-The set of instructions for the production of ‘King Lear’, directed by Sergei Radlov in Moscow in 1935 (F25) R14 incorporates The Yiddish text of ‘King Lear’ as translated by Shmuel Galkin (F22)
-
-The set of instructions for the production of ‘King Lear’, directed by Sergei Radlov in Moscow in 1935 (F25) R14 incorporates the musical content of the score of the incidental music composed by Lev Pulver (F22)
-
-The set of instructions for the production of ‘King Lear’, directed by Sergei Radlov in Moscow in 1935 (F25) R14 incorporates The visual items (E36) shown in Alexander Tyschler’s scene settings and the models built by him for these settings (F22 and E36)
-
-The set of instructions for the production of the ballet ‘Rite of spring’, as choreographed by Pina Bausch in Wuppertal in 1975 (F25) R14 incorporates the musical score of Igor Stravinsky’s musical work ‘Rite of spring’ (F22)
-		</Literal>
+Examples:	
+- The text of the present version of the FRBROO definition (F22) R14 incorporates the beginning of the Scope Note for E4 Period in the CIDOC CRM definition, version 4.4 (F23)
+- The text of the anthology entitled ‘American Women Poets of the Nineteenth Century: An Anthology’, edited by Cheryl Walker and published by Rutgers University Press in July 1992 (F22) R14 incorporates the text of the poem entitled ‘Acquainted with Grief’ and authored by Helen Hunt Jackson
+- The sonic content of the CD entitled ‘Great moments of Lucia Popp’ issued by EMI Music International in 1996 and identified by UPC/EAN ‘0724356577022’ (F24) R14 incorporates the recorded performance of Mozart’s aria entitled ‘Der Hölle Rache’ (also known as ‘The Queen of the Night’s Aria’) by Lucia Popp accompanied by the Philharmonia orchestra conducted by Otto Klemperer in London, Kingsway Hall, between March 24, 1964 and April 10, 1964 (F26)
+- The set of instructions for the production of ‘King Lear’, directed by Sergei Radlov in Moscow </Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>R14_incorporates</IRI>
-        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">incorporates</Literal>
+        <Literal datatypeIRI="&rdf;PlainLiteral">incorporates</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
@@ -3581,6 +3899,133 @@ The New York Public Library holding identified by call number ‘JMD 04-1060’ 
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>R32_is_warranted_by</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Scope note:	
+This property associates an instance of F35 Nomen Use Statement with an instance of F52 Name Use Activity which provides evidence for the use of the particular nomen in the stated sense. The association between this name use activity and a source for it may be described by the property P70 documents (is documented in).
+
+Examples:	
+- The variant controlled access point in record n 79021736, tagged in MARC21 format, ‘400 1_ |a Пруст, Марсель, |d 1871-1922’ found in the Library of Congress authorities as of 15 June 2012 (F35) R32 is warranted by the use of the name ‘Марсель Пруст’ in Cyrillic script (F52), for which evidence can be found in the publication referred to as ‘Andreev, L.G. Marselʹ Prust, 1968’ in the authority record established by the Library of Congress for Marcel Proust
+
+- The preferred access point in record sh 85109469, tagged in MARC21 format, ‘150 __ |a Quantum theory’ found in the Library of Congress authorities as of 15 June 2012 (F35) R32 is warranted by the use of the phrase ‘quantum theory’ in the English language (F52), as attested to by references to the NASA and INSPEC thesauri in the authority record established by the Library of Congress
+
+- The preferred access point in record sh 85074230 in the LCSH authority file tagged in MARC 21 in the field ‘150__ |a Lamniformes’ (F35) R32 is warranted by the use of the term ‘Lamniformes’ for mackerel sharks in the entry on page 51 of Fishes of the world by J.S. Nelson published in 1994 (F52)
+
+- The preferred access point in record n 85118480 in the Library of Congress name authority file as of 19 November 2012 tagged in MARC 21 in the field ‘110 2_ |a Canadian Academic Centre in Italy’ (F35) R32 is warranted by the use of the name ‘Canadian Academic Centre in Italy’ on page 6 of the book ‘Lo Scavo di S. Giovanni di Ruoti ed il periodo tardoantico in Basilicata’ published in 1983
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>R32_is_warranted_by</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">is warranted by</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>R33_has_content</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Scope note:	
+This property associates an instance of F12 Nomen with one or more equivalent serialized content models for it. In digital form the symbol arrangement constituting an instance of F12 Nomen can only be represented through a particular encoding, for example ASCII or Latin1 for the Latin script. We call such a representation a content model. The property R33.1 has encoding: E55 Type allows for specifying the encoding of a particular associated content model. Together with this specification, a content model allows for unambiguously defining a nomen independently from the encoding used for representing the content.
+
+Examples:	
+- ‘0x65 0x61 0x72 0x74 0x68’ [R33.1 has encoding ASCII]
+- ‘0x0065 0x0061 0x0072 0x0074 0x0068’ [R33.1 has encoding UNICODE UTF16]
+- ‘earth ’ [R33.1 has encoding printed Latin Arial]
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>R33_has_content</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">has content</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>R34_has_validity_period</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Scope note:	
+This property associates an instance of F34 KOS with the instance of E52 Time-Span describing the period for which the particular KOS Expression was regarded as valid by its maintainers. Each change of validity status of a nomen use statement within a KOS should be associated with a release change of the KOS. The individual time-span of a validity state of a nomen would be the union of the time-spans of the KOS in which the Nomen was declared to have the particular validity status (provisional, accepted, obsolete etc...).
+
+Examples:	
+- LCSH February 20 to March 19 2012 (F34) R34 has validity period February 20 to March 19 2012 (E52)
+
+- DDC 19 (F34) has validity period 1979 to 1989 (E52)
+
+Subproperty of:	
+Out of CRM Scope?: Validity periods of plans point to future?</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>R34_has_validity_period</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">has validity period</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>R36_uses_script_conversion</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Scope note:	
+This property associates an instance of F35 Nomen Use Statement with the instance of F36 Script Conversion that was used to create the Nomen referred to in the Nomen Use Statement. The source of this conversion may or may not be explicitly mentioned. Is shortcut of: F35 Nomen Use Statement R17 was created by (created) F28 Expression Creation P33 used specific technique (was used by) E29 Design or Procedure.
+
+Examples:	
+- ‘001  FRBNF120864715’…‘100  $w.0..ba....$aDu$mFu$d0712-0770’ (F35) R36 uses script conversion Pinyin (F36)
+
+- ‘001  FRBNF119547493’…‘100  w.0..barus.$aGončarova$mNatalʹâ Sergeevna$d1881-1962’ (F35) R36 uses script conversion ISO 9:1995 (F36
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>R36_uses_script_conversion</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">uses script conversion</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>R37_states_as_nomen</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Scope note:	
+This property associates an instance of F35 Nomen Use Statement with the instance of F12 Nomen for which it declares usage.
+
+Examples:	
+- ‘001  FRBNF120864715’…‘100  $w.0..ba....$aDu$mFu$d0712-0770’ (F35) R37 states as nomen ‘Du, Fu (0712-0770)’ (F50)
+
+- ‘001  FRBNF119547493’…‘100  w.0..barus.$aGončarova$mNatalʹâ Sergeevna$d1881-1962’ (F35) R37 states as nomen ‘Gončarova, Natalʹâ Sergeevna (1881-1962)’ (F50)
+
+-  ‘010 __ |a n 79021736’…‘400 1_ |a Пруст, Марсель, |d 1871-1922’ (F35) R37 states as nomen ‘Пруст, Марсель, 1871-1922’ (F50)
+
+- ‘010 __ |a sh 85074230’…‘150__ |a Lamniformes’ (F35) R37 states as nomen ‘Lamniformes’ (F12)
+
+- ‘010 __ |a sh 85074230’…‘053 _0 |a QL638.94.L36 |c Zoology’ (F35) R37 states as nomen the Library of Congress classification number QL638.94.L36 (F12)
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>R37_states_as_nomen</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">states as nomen</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>R38_refers_to_thema</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Scope note:	
+This property associates an instance of F35 Nomen Use Statement with the instance of E1 CRM Entity for which it declares the usage of a nomen.
+
+Examples:	
+- ‘010 __ |a sh 85109469’…‘150 __ |a Quantum theory’ [preferred subject access point from LCSH, http://lccn.loc.gov/sh85109469, as of 15 June 2012] (F35) R38 refers to thema the branch of physics known as quantum theory (F6 = E28)
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>R38_refers_to_thema</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">refers to thema </Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>R39_is_intended_for</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Scope note:	
+This property associates an instance of F35 Nomen Use Statement with an instance of E74 Group which is the target audience for which the associated nomen use is intended. To indicate that the associated nomen is declared as preferred in all contexts, the instance of E74 Group is ‘mankind’.
+
+Examples:	
+- ‘010 __ |a sj 96004896’…‘150 __ |a Belly button’ (F35) R39 is intended 
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>R39_is_intended_for</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">is intended for </Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>R3_is_realised_in</IRI>
         <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">Scope note:
 This property associates an instance of F22 Self-Contained Expression with an instance of F1 Work.
@@ -3793,34 +4238,6 @@ Assigning a subject heading (in a bibliographic record) to the concept of the ap
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>R47_used_constituent</IRI>
-        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">Scope note:
-This property associates the event of assigning an instance of F13 Identifier to an entity with  the elements that an actor used to compose that identifier.
-
-Examples:
-Assigning a uniform title to the anonymous textual work known as ‘The Adoration of the Shepherds’, a title shared by another, distinct anonymous textual work (F40) R47 used constituent ‘Coventry’ (E48 Place Name – i.e., the name of an F9 Place)
-
-Assigning a uniform title to Pina Bausch’s choreographic work initially simply entitled ‘Rite of spring’ (F40) R47 used constituent ‘(Choreographic Work: Bausch)’ (F12), which in turn is composed of ‘Choreographic Work’ (F12 Name for an E55 Type), and ‘Bausch’ (F12 Name for an F10 Person)
-
-Assigning a uniform title to the motion picture directed in 1933 by Merian C. Cooper and Ernest B. Schoedsack and entitled ‘King Kong’ (F40) R47 used constituent ‘1933’ (E50 Date, subclass of E41 Appellation)
-
-Assigning the personal name heading ‘Guillaume, de Machaut, ca. 1300-1377’ to Guillaume de Machaut (F40) R47 used constituent ‘Guillaume, de Machaut’ (F12 Name for an F10 Person), and ‘ca. 1300-1377’ (E49 Time Apellation for an E52 Time-Span [P79 beginning is qualified by E62 String “ca.”])
-
-Assigning the corporate name heading ‘Univerza v Ljubljani. Oddelek za bibliotekarstvo’ to The Department for library science of the University of Ljubljana (F40) R47 used constituent ‘Univerza v Ljubljani’ (F13 Identifier for an F11 Corporate Body), and ‘Oddelek za bibliotekarstvo’ (F13 Identifier for an F11 Corporate Body)
-		</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>R47_used_constituent</IRI>
-        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">used constituent</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>R47i_was_used_in</IRI>
-        <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">was used in</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>R48_assigned_to</IRI>
         <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">Scope note:
 This property associates the event of assigning a representative instance of F3 Manifestation Product Type or F4 Manifestation Singleton with the expression to which it was assigned.
@@ -3975,6 +4392,22 @@ Assigning a representative manifestation to the musical text of Stanislas Champe
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>R56_has_related_use</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Scope note:	
+This property associates an instance of F35 Nomen Use Statement with another instance of F35 Nomen Use Statement which has a related use in some context, such as alternative, lexical variant, replacing former use etc. The property R56.1 allows for specifying the particular kind of the nomen use statement relationship.
+
+Examples:	
+- ‘001  FRBNF122597517’…‘14506$w.1..b.fre.$aDu sublime’ (F35) R56 has related use ‘001  FRBNF122597517’…‘14506$w.0..g.grp $aΠερὶ ὕπσους’ (F35) R56.1 has type parallel form (E55)
+- ‘001  FRBNF126866954’…‘100 $w.0..b.....$aTyrrell$mGeorge$d1861-1909’ (F35) R56 has related use ‘001  FRBNF126866954’…‘466  $w....b     $aTyrell$oAffaire$g1907’ (F35) R56.1 has type variant access point for a personal name, intended to be displayed in a subject index only, and not in a personal names index (E55) [Explanation: in the Intermarc format used at the National Library of France, tag 466 in an authority record for a person serves to introduce a topical term which is displayed as a variant form for the personal name in the subject index, but is not displayed in the name index]
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>R56_has_related_use</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">has relatd use</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>R5_has_component</IRI>
         <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">Scope note:
 This property associates an F2 Expression X with a structural component Y that conveys in itself the complete concept of a work that is member of (R10) the overall work realized by X.
@@ -3998,6 +4431,45 @@ The visual content of the map entitled ‘Wales – The Midlands – South West 
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>R5i_is_component_of</IRI>
         <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">is component of</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>R63_named</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Scope note:	
+This property associates an instance of F52 Name Use Activity with the instance of E1 CRM Entity that the associated name was used for.
+
+Examples:	
+- The recording of the MARC 21 field ‘110 2_ |a Canadian Academic Centre in Italy’ (F52) R63 named the instance of F11 Corporate body represented by the Library of Congress authority record number n 85118480
+- The appearance of the name ‘Centro accademico canadese in Italia’ on the title page of the book ‘Lo Scavo di S. Giovanni di Ruoti ed il periodo tradonantico in Basilicata’ [correct title: tardoantico] published in 1983 (F52) R63 named the instance of F11 Corporate body represented by the Library of Congress authority record number n 85118480
+- The statement ‘The International Federation of Library Associations and Institutions (IFLA) is the leading international body representing the interests of library and information services and their users’ cited from the ‘About IFLA’ page of the website http://www.ifla.org/ (F35) R63 named the instance of F11 Corporate Body represented by the Library of Congress authority record number n 78004438
+
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>R63_named</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">named</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>R64_used_name</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Scope note:	
+This property associates an instance of F52 Name Use Activity with the instance of E41 Appellation that was used for the associated entity.
+
+Examples:	
+- The appearance of the name ‘Lewis Carroll’ on the title page of ‘Le avventure d’Alice nel paese delle meraviglie’, published in 1872 in London by Macmillan and Co. (F52) R64 used name ‘Lewis Carroll’ (E41)
+
+- The appearance of the name &apos;Centro accademico canadese in Italia&apos; on the title page of the book ‘Lo Scavo di S. Giovanni di Ruoti ed il periodo tardoantico in Basilicata’ published in 1983 (F52) R64 used name ‘Centro accademico canadese in Italia’ (E41)
+
+- The appearance of the name ‘Canadian Academic Centre in Italy’ on page 6 of the book ‘Lo Scavo di S. Giovanni di Ruoti ed il periodo tardoantico in Basilicata’ published in 1983 (F52) R64 used name ‘Canadian Academic Centre in Italy’ (E41)
+
+- The appearance of the name ‘IFLA’ as an acronym for “The International Federation of Library Associations and Institutions” in the sentence (F2) “The International Federation of Library Associations and Institutions (IFLA) is the leading international body representing the interests of library and information services and their users” cited from the “About IFLA” page of the website http://www.ifla.org/ (F52) R64 used name ‘IFLA’ (E41)
+</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>R64_used_name</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">used name</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
@@ -4040,6 +4512,21 @@ The item held by the National Library of France and identified by shelf mark ‘
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <IRI>R7i_has_example</IRI>
         <Literal xml:lang="en" datatypeIRI="&rdf;PlainLiteral">has example</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>R8_consists_of</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Scope note:	
+This property associates an instance of F13 Identifier with one of the non-syntactic instances of E90 Symbolic Object which form part of it.
+
+Examples:	
+- Uniform title ‘The Adoration of the Shepherds (Coventry)’ (F50) R8 consists of ‘The Adoration of the Shepherds’ (E35), and R8 consists of ‘Coventry’ (E48)
+-Uniform title ‘Rite of spring (Choreographic Work : Bausch)’ (F50) R8 consists of ‘Rite of spring’ (E35), R8 consists of ‘Choreographic Work’ (F12), and R8 consists of ‘Bausch’ (F12)
+- Uniform title ‘King Kong (1933)’ (F50) R8 consists of ‘King Kong’ (E35), and R8 consists of ‘1933’ (E50)
+Controlled access point ‘Guillaume, de Machaut, ca. 1300-1377’ (F50) R8 consists of ‘Guillaume, de Machaut’ (F12), and R8 consists of ‘ca. 1300-1377’ (E90)
+- Controlled access point ‘Univerza v Ljubljani. Oddelek za bibliotekarstvo’ (F50) R8 consists of ‘Univerza v Ljubljani’ (F12), and R8 consists of ‘Oddelek za bibliotekarstvo’ (F12)
+- ISBN ‘978-002-002-0’ (F13) R8 consists of ‘978’ (E90) indicating the Nigerian ISBN Agency, R8 consists of ‘002’ (E90) indicating the Nigerian Institute of International Affairs, R8 consists of ‘002’ (E90) used for the publication entitled ‘Nigeria’s international economic relations’, and R8 consists of ‘0’ (E90)
+</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
