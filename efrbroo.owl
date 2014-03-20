@@ -1368,7 +1368,7 @@ For R40_has_representative_expression changed its superproperty from P130 to R3_
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="R56_has_related_use"/>
-        <ObjectProperty abbreviatedIRI="ecrm:P69_is_associated_with"/>
+        <ObjectProperty abbreviatedIRI="ecrm:P69_has_association_with"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="R5_has_component"/>
@@ -2182,7 +2182,7 @@ For R40_has_representative_expression changed its superproperty from P130 to R3_
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <AbbreviatedIRI>ecrm:P69_is_associated_with</AbbreviatedIRI>
+        <AbbreviatedIRI>ecrm:P69_has_association_with</AbbreviatedIRI>
         <Literal datatypeIRI="&rdf;PlainLiteral">has association with</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
